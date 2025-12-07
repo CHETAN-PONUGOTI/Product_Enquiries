@@ -1,0 +1,11 @@
+INSERT INTO products (name, category, short_desc, long_desc, price, image_url) VALUES
+('Quantum Laptop X', 'Electronics', 'Ultra-light laptop with 14-inch OLED display.', 'The Quantum Laptop X features an Intel i7 processor, 32GB RAM, and a 1TB SSD, perfect for professionals.', 1299.99, '/images/laptop.jpg'),
+('The Last Scroll (Hardcover)', 'Books', 'A thrilling fantasy epic that redefines the genre.', 'Follow the journey of Elara, a novice mage, as she uncovers a secret that could save or destroy the world.', 24.50, '/images/book.jpg'),
+('Ergonomic Mesh Chair', 'Furniture', 'High-back office chair with lumbar support and adjustable armrests.', 'Designed for long hours of work, this chair combines breathability with premium support.', 199.00, '/images/chair.jpg'),
+('Digital Art Tablet Pro', 'Electronics', '16-inch drawing tablet with pressure-sensitive pen.', 'Perfect tool for digital artists and graphic designers. Includes programmable shortcut keys.', 450.75, '/images/tablet.jpg'),
+('Espresso Machine Duo', 'Home Appliances', 'Automatic machine for two perfect cups of espresso at once.', 'Features 15-bar pressure and an integrated milk frother.', 320.00, '/images/espresso.jpg'),
+('Yoga Mat Pro', 'Sports', 'Non-slip yoga mat', '6mm thickness, eco-friendly material.', 39.99, '/images/yogamat.jpg'),
+('Desk Lamp LED', 'Home', 'Adjustable LED desk lamp', 'Dimmable lamp with USB charging port.', 34.00, '/images/desklamp.jpg');
+
+INSERT INTO enquiries (product_id, name, email, phone, message) VALUES
+(1, 'Chetan Ponugoti', 'chetan@example.com', '8897543517', 'I am interested in bulk ordering 10 units of the Quantum Laptop X. Can you provide a corporate discount?');
