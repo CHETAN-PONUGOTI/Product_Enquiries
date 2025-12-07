@@ -8,7 +8,7 @@ export default defineConfig({
     // Configure proxy to forward API calls to the Express backend
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'https://product-enquiries-1.onrender.com',
         changeOrigin: true,
         secure: false,
       },
