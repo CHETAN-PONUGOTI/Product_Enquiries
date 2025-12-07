@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
-
-// Define the API Base URL using the VITE environment variable
-// It will be empty locally (using Vite's proxy) or the Render URL in production.
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const ProductList = () => {
@@ -17,27 +14,22 @@ const ProductList = () => {
 
   const limit = 6;
 
-  // 1. NEW EFFECT: Fetch ALL unique categories once on component mount
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        // Use the API_BASE_URL prefix
         const response = await axios.get(`${API_BASE_URL}/api/products/categories`);
-        // Set categories state with 'All' prepended
         setCategories(['All', ...response.data]);
       } catch (err) {
         console.error('Error fetching unique categories:', err);
-        setCategories(['All']); // Fallback
+        setCategories(['All']); 
       }
     };
     fetchCategories();
-  }, []); // Empty dependency array: runs only once
+  }, []);
 
-  // 2. UPDATED fetchProducts: Uses API_BASE_URL and REMOVES category generation
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      // Use the API_BASE_URL prefix
       const response = await axios.get(`${API_BASE_URL}/api/products`, {
         params: {
           search,
@@ -49,15 +41,8 @@ const ProductList = () => {
       setProducts(response.data.products);
       setTotalPages(response.data.totalPages);
       
-      // ❌ REMOVE THIS BLOCK to fix the category persistence issue
-      /*
-      const allCats = response.data.products.map(p => p.category);
-      setCategories(['All', ...new Set(allCats)].sort());
-      */
-
     } catch (err) {
       console.error('Error fetching products:', err);
-      // Optional: Log API Base URL to debug Vercel 404/400 errors
       console.log('API Request URL:', `${API_BASE_URL}/api/products`); 
     } finally {
       setLoading(false);
@@ -66,7 +51,6 @@ const ProductList = () => {
 
   useEffect(() => {
     fetchProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, category, page]);
 
   const handleSearchChange = (e) => {
@@ -99,13 +83,11 @@ const ProductList = () => {
           onChange={handleCategoryChange}
           className="px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-indigo-500 focus:border-indigo-500"
         >
-          {/* Categories are now populated by the initial fetch in the useEffect hook */}
           {categories.map(cat => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
       </div>
-      {/* ... rest of the component (product display, pagination) remains the same ... */}
       
       {products.length === 0 ? (
         <div className="text-center py-10">
